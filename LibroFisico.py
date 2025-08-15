@@ -2,20 +2,22 @@
 from MaterialBiblioteca import MaterialBiblioteca
 
 #Herencia
-class libroFisico(MaterialBiblioteca):
-    def __init__(self, titulo, autor, id, estado_prestamo, tamaño_archivo):
+class LibroFisico(MaterialBiblioteca):
+    
+    def __init__(self, titulo, autor, id, estado_prestamo, no_ejemplar):
 
         #Constructor de clase base
         super().__init__(titulo, autor, id, estado_prestamo)
-        self.__tamaño_archivo = tamaño_archivo
+        self.__no_ejemplar = no_ejemplar
 
     #Encapsulamos
-    def getTamañoArchivo(self):
-        return self.__tamaño_archivo
+    def getNoEjemplar(self):
+        return self.__no_ejemplar
     
-    def setTamañoArchivo(self, tamaño_archivo):
-        self.__tamaño_archivo = tamaño_archivo
+    def setNoEjemplar(self, no_ejemplar):
+        self.__no_ejemplar = no_ejemplar
 
     #Polimorfismo
     def informacion(self):
-      return f"Titulo del libro: {self.getTitulo()}, \nAutor: {self.getAutor()}, \nCódigo único: {self.getID()}, \nEstado del prestamo: {self.getEstadoPrestamo()}, \nTamaño de Archivo: {self.getTamañoArchivo()}."
+      return f"\nTitulo del libro: {self.getTitulo()}, \nAutor: {self.getAutor()}, \nCódigo único: {self.getID()}, \nEstado del prestamo: {self.getEstadoPrestamo()}, \nNúmero de ejemplar: {self.getNoEjemplar()}."
+    

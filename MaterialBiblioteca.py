@@ -10,7 +10,7 @@ class MaterialBiblioteca(ABC):
         self.__titulo = titulo
         self.__autor = autor
         self.__id = id
-        self.__estadoPrestamo = estado_prestamo
+        self.__estado_prestamo = estado_prestamo
 
     #GETS Y SETS
     def getTitulo(self):
@@ -32,12 +32,12 @@ class MaterialBiblioteca(ABC):
         self.__id = id
 
     def getEstadoPrestamo(self):
-        return self.__estadoPrestamo
+        return self.__estado_prestamo
     
     def setEstadoPrestamo(self, estado_prestamo):
-        self.__estadoPrestamo = estado_prestamo
+        self.__estado_prestamo = estado_prestamo
 
     #Abstracción
     @abstractmethod
-    def información(self):
+    def informacion(self):
         pass
