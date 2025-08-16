@@ -19,6 +19,11 @@ if __name__ == "__main__":
     fisico = None
     tiempoDevolucion = None
 
+    #BIBLIOTECAS
+    libreriaFisica = {}
+    libreriaDigital = {}
+    libros_prestados = {}
+
     #MÉTODO PARA REGISTRAR LIBROS
     def registrarLibro():
             print('\n------------Registrar un Libro--------------')
@@ -62,7 +67,6 @@ if __name__ == "__main__":
                 print("\nSelecciona una opción válida")
 
     #MÉTODO PARA GUARDAR LIBROS EN BIBLIOTECA
-    libreriaFisica = {}
     def guardar_libroFisico(fisico):
         
         idLibro = fisico.getID()
@@ -100,16 +104,16 @@ if __name__ == "__main__":
             prestarLibros()
 
         elif opcion3 == 2:
-            print("Devolver material")
+            devolverLibros()
 
         elif opcion3 == 3:
             print("\nRegresando al menú principal...")
             return
-            
+            #202400111 - RICHARD STEVEN ARIZANDIETA - 2025
         else:
             print("\nSelecciona una opción válida")
 
-    #MÉTODO PARAA PRESTAR LIBROS
+    #MÉTODO PARA PRESTAR LIBROS
     def prestarLibros():
         print("\nMostrando libros disponibles:")
         print("\nLibreria Física: ")
@@ -147,6 +151,42 @@ if __name__ == "__main__":
 
         else:
             print(f'\nEl libro con ID "{idPrestar}" no existe en ninguna librería')
+
+    #MÉTODO PARA MOSTRAR SOLO LIBROS PRESTADOS
+    def mostrar_prestados():
+        fisicos_prestados = {id_libro: datos 
+                        for id_libro, datos in libreriaFisica.items() 
+                        if datos["Estado de prestamo"] == True
+        }
+
+        digitales_prestados = {id_libro: datos 
+                        for id_libro, datos in libreriaDigital.items() 
+                        if datos["Estado de prestamo"] == True
+        }
+
+        print("Librería física: ")
+        pprint(fisicos_prestados)
+        print("Librería digital: ")
+        pprint(digitales_prestados)
+
+    #MÉTODO PARA DEVOLVER LIBROS
+    def devolverLibros():
+        #MOSTRAMOS LOS QUE CUENTEN CONO ESTADO DEVOLUCCIÓN = True
+        print("\nLibros prestados: ")
+        mostrar_prestados()
+        
+        idDevolver = input("\nEscribe el ID del libro a devolver: ")
+
+        if idDevolver in libreriaFisica:
+            libreriaFisica[idDevolver]["Estado de prestamo"] = False
+            print(f"El libro con ID {idDevolver} ha sido devuelto!")
+
+        elif idDevolver in libreriaDigital:
+            libreriaDigital[idDevolver]["Estado de prestamo"] = False
+            print(f"El libro con ID {idDevolver} ha sido devuelto!")
+            
+        else:
+            print(f"El libro con ID {idDevolver} no ha sido prestado o no existe en las librerías")
 
     #Interfaz inicial
     while True: 

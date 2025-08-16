@@ -21,3 +21,5 @@ class LibroFisico(MaterialBiblioteca):
     def informacion(self):
       return f"\nTitulo del libro: {self.getTitulo()}, \nAutor: {self.getAutor()}, \nCódigo único: {self.getID()}, \nEstado del prestamo: {self.getEstadoPrestamo()}, \nNúmero de ejemplar: {self.getNoEjemplar()}."
     
+
+    #202400111 - RICHARD STEVEN ARIZANDIETA - 2025
