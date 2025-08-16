@@ -32,7 +32,11 @@ if __name__ == "__main__":
             print('|3. Salir                                  |')
             print('--------------------------------------------')
 
-            opcion2 = int(input("\nSelecciona una opción: "))
+            try:
+                opcion2 = int(input("\nSelecciona una opción: ") or -1)
+            except ValueError:
+                print("\nEntrada inválida, escribe un número.")
+                return
 
             #REGISTRANDO LIBRO FISICO
             if opcion2 == 1:
@@ -44,7 +48,6 @@ if __name__ == "__main__":
                 fisico = LibroFisico(titulo, autor, id, estado_prestamo, no_ejemplar)
                 guardar_libroFisico(fisico)
                 print("\nLibro registrado exitosamente con el ID:", id)
-                print(libreriaFisica)
 
 
             elif opcion2 == 2:
@@ -56,7 +59,6 @@ if __name__ == "__main__":
                 digital = LibroDigital(titulo, autor, id, estado_prestamo, tamaño_archivo)
                 guardar_libroDigital(digital)
                 print("\nLibro registrado exitosamente con el ID:", id)
-                print(libreriaDigital)
 
 
             elif opcion2 == 3:
@@ -95,10 +97,15 @@ if __name__ == "__main__":
         print('\n------------Gestionar material--------------')
         print('|1. Prestar material                       |')
         print('|2. Devolver material prestado             |')
-        print('|3. Salir                                  |')
+        print('|3. Consultar información de libros        |')
+        print('|4. Salir                                  |')
         print('--------------------------------------------')
 
-        opcion3 = int(input("\nSelecciona una opción: "))
+        try:
+            opcion3 = int(input("\nSelecciona una opción: ") or -1)
+        except ValueError:
+            print("\nEntrada inválida. Por favor escribe un número.")
+            return
 
         if opcion3 == 1:
             prestarLibros()
@@ -107,11 +114,34 @@ if __name__ == "__main__":
             devolverLibros()
 
         elif opcion3 == 3:
+            consultarInfo()
+
+        elif opcion3 == 4:
             print("\nRegresando al menú principal...")
             return
             #202400111 - RICHARD STEVEN ARIZANDIETA - 2025
         else:
             print("\nSelecciona una opción válida")
+
+    #MÉTODO PARA VER INFO DE CADA LIBRO
+    def consultarInfo():
+        print("\nMostrando libros disponibles:")
+        print("\nLibreria Física: ")
+        pprint(libreriaFisica)
+        print("\nLibrería Digital: ")
+        pprint(libreriaDigital)
+
+        idVer = input("\nEscibe el ID del libro a revisar: ")
+
+        if idVer in libreriaFisica:
+            print(libreriaFisica[idVer])
+
+        elif idVer in libreriaDigital:
+            print(libreriaDigital[idVer])
+        else:
+            print("\nEl id no existe en ninguna librería.")
+
+
 
     #MÉTODO PARA PRESTAR LIBROS
     def prestarLibros():
@@ -127,7 +157,11 @@ if __name__ == "__main__":
             tiempoDevolucion = 7
 
             if not libreriaFisica[idPrestar]["Estado de prestamo"]:
-                tiempoUso = int(input(f"\nEscribe cuantos días lo utilizarás (MAX. {tiempoDevolucion} DÍAS): "))
+                try:
+                    tiempoUso = int(input(f"\nEscribe cuantos días lo utilizarás (MAX. {tiempoDevolucion} DÍAS): ") or 0)
+                except ValueError:
+                    print("\nEntrada inválida. No se puede procesar el préstamo.")
+                    return
                 if tiempoUso <= tiempoDevolucion:
                     libreriaFisica[idPrestar]["Estado de prestamo"] = True
                     print(f"\nEl libro con ID {idPrestar} ha sido prestado por {tiempoUso} días!")
@@ -140,7 +174,11 @@ if __name__ == "__main__":
             tiempoDevolucion = 3
 
             if not libreriaDigital[idPrestar]["Estado de prestamo"]:
-                tiempoUso = int(input(f"\nEscribe cuantos días lo utilizarás (MAX. {tiempoDevolucion} DÍAS): "))
+                try:
+                    tiempoUso = int(input(f"\nEscribe cuantos días lo utilizarás (MAX. {tiempoDevolucion} DÍAS): ") or 0)
+                except ValueError:
+                    print("\nEntrada inválida. No se puede procesar el préstamo.")
+                    return
                 if tiempoUso <= tiempoDevolucion:
                     libreriaDigital[idPrestar]["Estado de prestamo"] = True
                     print(f"\nEl libro con ID {idPrestar} ha sido prestado por {tiempoUso} días!")
@@ -196,7 +234,11 @@ if __name__ == "__main__":
         print('|3. Salir                                  |')
         print('--------------------------------------------')
 
-        opcion = int(input("\nSelecciona una opción: "))
+        try:
+            opcion = int(input("\nSelecciona una opción: "))
+        except ValueError:
+            print("\nEntrada inválida, escribe un número.")
+            continue
 
         if opcion == 1:
             registrarLibro()
